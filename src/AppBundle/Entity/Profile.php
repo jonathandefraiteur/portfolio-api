@@ -11,12 +11,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ApiResource(
  *     collectionOperations={
+ *         "get"={"method"="GET", "path"="/me"},
  *         "post"={"method"="POST", "path"="/me"}
  *     },
  *     itemOperations={
  *         "get"={"method"="GET", "path"="/me/{id}"},
  *         "put"={"method"="PUT", "path"="/me/{id}"}
- *     }
+ *     },
+ *     attributes={"jsonld_embed_context"=true}
  * )
  * @ORM\Entity
  */
