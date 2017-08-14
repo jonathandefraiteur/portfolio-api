@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -103,6 +104,18 @@ class Profile
      * @ORM\Column(type="string")
      */
     private $emailAddress;
+
+    /**
+     * @var ContactLink[]
+     *
+     * @ORM\OneToMany(targetEntity="ContactLink", mappedBy="profile")
+     */
+    private $contactLinks;
+
+    public function __construct()
+    {
+        $this->contactLinks = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -352,5 +365,39 @@ class Profile
     public function getEmailAddress()
     {
         return $this->emailAddress;
+    }
+
+    /**
+     * Add contactLink
+     *
+     * @param ContactLink $contactLink
+     *
+     * @return Profile
+     */
+    public function addContactLink(ContactLink $contactLink)
+    {
+        $this->contactLinks[] = $contactLink;
+
+        return $this;
+    }
+
+    /**
+     * Remove contactLink
+     *
+     * @param ContactLink $contactLink
+     */
+    public function removeContactLink(ContactLink $contactLink)
+    {
+        $this->contactLinks->removeElement($contactLink);
+    }
+
+    /**
+     * Get contactLinks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContactLinks()
+    {
+        return $this->contactLinks;
     }
 }
