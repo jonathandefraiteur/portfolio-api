@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * A Profile, unique in the app.
  *
+ * TODO: Make this entity be unique. Remove collection operations and create a custom action for registering/start portfolio.
  * @ApiResource(
  *     collectionOperations={
  *         "get"={"method"="GET", "path"="/me"},
