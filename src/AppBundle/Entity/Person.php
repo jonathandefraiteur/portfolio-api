@@ -11,8 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * Partial usage of http://schema.org/Person
  *
- * @ApiResource()
- * @ORM\Entity
+ *
+ * @deprecated Could be used later but prefer Profile for now
+ * @ ApiResource()
+ * @ ORM\Entity
  */
 class Person
 {
@@ -26,7 +28,7 @@ class Person
      */
     private $id;
     /**
-     * @var string Given name. In the U.S., the first name of a Person
+     * @var string Given name. In mamthe U.S., the first name of a Person
      *
      * @ORM\Column(type="string", nullable=true)
      */

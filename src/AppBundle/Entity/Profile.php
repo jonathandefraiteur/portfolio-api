@@ -106,7 +106,7 @@ class Profile
     /**
      * Get id
      *
-     * @return guid
+     * @return guid|string
      */
     public function getId()
     {
