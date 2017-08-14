@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -28,12 +29,16 @@ class ContactLink
      * @var int The type of the contact link
      * @see \ContactLinkType
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="integer")
      */
     private $type;
 
     /**
      * @var string The name of the contact link (facebook, tumblr, twitter...)
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
@@ -43,6 +48,8 @@ class ContactLink
     /**
      * @var string The url for the link
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="string")
      * @Assert\Url()
      */
@@ -50,6 +57,8 @@ class ContactLink
 
     /**
      * @var string The title to quickly describe the link
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="string", nullable=true)
      */

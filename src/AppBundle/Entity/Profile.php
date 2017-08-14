@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,14 +14,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  * TODO: Make this entity be unique. Remove collection operations and create a custom action for registering/start portfolio.
  * @ApiResource(
  *     collectionOperations={
- *         "get"={"method"="GET", "path"="/me"},
- *         "post"={"method"="POST", "path"="/me"}
+ *         "get"={"method"="GET"},
+ *         "post"={"method"="POST"}
  *     },
  *     itemOperations={
- *         "get"={"method"="GET", "path"="/me/{id}"},
- *         "put"={"method"="PUT", "path"="/me/{id}"}
+ *         "get"={"method"="GET"},
+ *         "put"={"method"="PUT"}
  *     },
- *     attributes={"jsonld_embed_context"=true}
+ *     attributes={
+ *         "jsonld_embed_context"=true,
+ *         "normalization_context"={"groups"={"profile_read"}}
+ *     }
  * )
  * @ORM\Entity
  */
@@ -28,6 +32,8 @@ class Profile
 {
     /**
      * @var string The name of the text to retrieve it
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Id
      * @ORM\Column(type="guid")
@@ -38,12 +44,16 @@ class Profile
     /**
      * @var string The first name of the profile
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="string")
      */
     private $firstName;
 
     /**
      * @var string The last name of the profile
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="string")
      */
@@ -52,12 +62,16 @@ class Profile
     /**
      * @var string The place of the profile
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="string")
      */
     private $place;
 
     /**
      * @var string The title of the profile
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="string")
      */
@@ -66,12 +80,16 @@ class Profile
     /**
      * @var string The summary about the profile
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="text")
      */
     private $summary;
 
     /**
      * @var string The description of the profile, in markdown
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="text")
      */
@@ -80,12 +98,16 @@ class Profile
     /**
      * @var string The birth date of the profile
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="date")
      */
     private $birthDate;
 
     /**
      * @var int The gender of the profile
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="smallint", options={"default":0})
      */
@@ -94,12 +116,16 @@ class Profile
     /**
      * @var string The phone number of the profile
      *
+     * @Groups({"profile_read"})
+     *
      * @ORM\Column(type="string")
      */
     private $phoneNumber;
 
     /**
      * @var string The email address of the profile
+     *
+     * @Groups({"profile_read"})
      *
      * @ORM\Column(type="string")
      */
@@ -108,7 +134,9 @@ class Profile
     /**
      * @var ContactLink[]
      *
-     * @ORM\OneToMany(targetEntity="ContactLink", mappedBy="profile")
+     * @Groups({"profile_read"})
+     *
+     * @ORM\OneToMany(targetEntity="ContactLink", mappedBy="profile_read")
      */
     private $contactLinks;
 
